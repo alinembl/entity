@@ -4,12 +4,19 @@
   "description": "Learning OO by implementing a Object-Document Mapper",
   "author": "Aline Bispo <alinembispolima@gmail.com>",
   "license": "ISC",
-  "main": "index.js",
+  "main": "src/entity.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -b --recursive --require babel-register",
+    "test:watch": "mocha -b --recursive --require babel-register -w"
   },
   "devDependencies": {
+    "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "uuid": "^3.3.2"
   }
 }

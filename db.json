@@ -1,0 +1,8 @@
+{
+  "users": [
+    { "uuid": "1234-1234-1234-1234", "username": "joelwallis", "email": "" },
+  ],
+  "products": [
+    { "uuid": "4321-4321-4321-4321", "title": "TV Samsung 4K 55\" webOS" }
+  ]
+}
