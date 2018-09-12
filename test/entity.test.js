@@ -23,7 +23,12 @@ describe('Entity', () => {
 
   it('is a class', () => {
     expect(Entity).to.be.a('function')
-    expect(new Entity()).to.be.a.instanceof(Entity)
+    expect(new Entity({ dbPath: './db.json' })).to.be.a.instanceof(Entity)
+  })
+
+  it('requires a parameter dbPath', () => {
+    expect(() => new Entity()).to.throw()
+    expect(() => new Entity({ dbPath: './db.json' })).to.not.throw()
   })
 
   it('create()', () => {

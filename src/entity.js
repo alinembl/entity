@@ -6,6 +6,13 @@ import fs from 'fs'
 import uuid from 'uuid'
 
 export default class Entity {
+  constructor (params) {
+    if (!params || !params.dbPath) {
+      throw new Error('Parameter dbPath is required.')
+    }
+
+    this.dbPath = params.dbPath
+  }
   static create (params) {
     const { table, entity } = params
 
