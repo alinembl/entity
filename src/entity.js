@@ -13,19 +13,17 @@ export default class Entity {
 
     this.dbPath = params.dbPath
   }
-  static create (params) {
+  create (params) {
     const { table, entity } = params
 
     entity.uuid = uuid()
 
-    const fileContents = fs.readFileSync('../db.json', 'utf8')
+    const fileContents = fs.readFileSync(this.dbPath, 'utf8')
     const db = JSON.parse(fileContents)
 
     db[table].push(entity)
-    // console.log(db)
     const data = JSON.stringify(db)
-    // console.log(data)
-    fs.writeFileSync('../db.json', data, 'utf8')
+    fs.writeFileSync(this.dbPath, data, 'utf8')
 
     return entity
   }
