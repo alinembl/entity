@@ -43,42 +43,42 @@ describe('Entity', () => {
     expect(newEntity.uuid).to.not.equal(undefined)
     expect(newEntity.uuid).to.be.a('string')
 
-    const foundEntity = Entity.read({ table: 'users', uuid: newEntity.uuid })
+    const foundEntity = entity.read({ table: 'users', uuid: newEntity.uuid })
 
     expect(newEntity.uuid).to.equal(foundEntity.uuid)
     expect(newEntity.username).to.equal(foundEntity.username)
   })
 
   it('read()', () => {
-    const joel = Entity.read({ table: 'users', uuid: 'a1b2c3' })
+    const entity = new Entity({ dbPath: '../db.json' })
+    const joel = entity.read({ table: 'users', uuid: 'a1b2c3' })
 
     expect(joel.username).to.equal('joel')
   })
 
   it('update()', () => {
-    const entity = Entity.read({ table: 'users', uuid: 'a1b2c3' })
-    entity.name = 'joel wallis'
-    Entity.update({
+    const entity = new Entity({ dbPath: '../db.json' })
+    const entityForUpdate = entity.read({ table: 'users', uuid: 'a1b2c3' })
+    entityForUpdate.name = 'joel wallis'
+    entity.update({
       table: 'users',
-      uuid: entity.uuid,
-      entity: entity
+      uuid: entityForUpdate.uuid,
+      entity: entityForUpdate
     })
-    const updatedEntity = Entity.read({ table: 'users', uuid: 'a1b2c3' })
-    expect(entity.uuid).to.equal(updatedEntity.uuid)
-    expect(entity.username).to.equal(updatedEntity.username)
-    expect(entity.name).to.equal(updatedEntity.name)
+    const updatedEntity = entity.read({ table: 'users', uuid: 'a1b2c3' })
+    expect(entityForUpdate.uuid).to.equal(updatedEntity.uuid)
+    expect(entityForUpdate.username).to.equal(updatedEntity.username)
+    expect(entityForUpdate.name).to.equal(updatedEntity.name)
   })
 
   it('delete()', () => {
-    // - Ler entidade
-    // deletar
-    // conferir se a entidade foi deletada da tabela
-    const entity = Entity.read({ table: 'users', uuid: 'a1b2c3' })
-    Entity.delete({
+    const entity = new Entity({ dbPath: '../db.json' })
+    const entityForDelete = entity.read({ table: 'users', uuid: 'a1b2c3' })
+    entity.delete({
       table: 'users',
-      uuid: entity.uuid
+      uuid: entityForDelete.uuid
     })
-    const deletedEntity = Entity.read({ table: 'users', uuid: 'a1b2c3' })
+    const deletedEntity = entity.read({ table: 'users', uuid: 'a1b2c3' })
     expect(deletedEntity).to.equal(undefined)
   })
 })
